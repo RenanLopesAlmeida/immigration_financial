@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData createAppTheme() {
+ThemeData makeAppTheme() {
   // final primaryDark3Color = Color(0xff1d1f2e);
   final _titleColor = Color(0xff90ADC6);
   // final _darkColor = Color(0xff040404);

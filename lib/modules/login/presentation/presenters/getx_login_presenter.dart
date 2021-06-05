@@ -7,13 +7,12 @@ import '../../login.dart';
 class GetxLoginPresenter implements LoginPresenter {
   GetxLoginPresenter({
     @required this.validation,
-    @required this.authentication,
     //@required this.saveCurrentAccount,
   });
 
   final Validation validation;
   //final SaveCurrentAccount saveCurrentAccount;
-  final Authentication authentication;
+  //final Authentication authentication;
 
   String _email;
   String _password;
@@ -37,8 +36,8 @@ class GetxLoginPresenter implements LoginPresenter {
   Stream<String> get passwordErrorStream => _passwordError.stream;
 
   Future<void> authenticate() async {
-    final accountEntity = await authentication
-        .auth(AuthenticationParams(email: _email, password: _password));
+    // final accountEntity = await authentication
+    //     .auth(AuthenticationParams(email: _email, password: _password));
 
     //await saveCurrentAccount.save(accountEntity);
   }

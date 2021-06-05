@@ -1,2 +1,2 @@
 export './login_presenter.dart';
-export './validation.dart';
+export '../../../core/validation/protocols/validation.dart';
