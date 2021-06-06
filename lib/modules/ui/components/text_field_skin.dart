@@ -9,7 +9,7 @@ class TextFieldSkin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
+      //height: 48,
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

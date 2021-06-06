@@ -14,10 +14,12 @@ class _EmailInput extends StatelessWidget {
           return TextField(
             onChanged: presenter.validateEmail,
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),
               hintText: 'E-mail',
               prefixIcon: Icon(Icons.mail),
               border: InputBorder.none,
               errorText: errorText?.isEmpty == true ? null : errorText,
+              //errorStyle: TextStyle(height: 5)
             ),
           );
         },

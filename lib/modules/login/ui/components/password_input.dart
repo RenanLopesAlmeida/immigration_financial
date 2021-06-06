@@ -16,6 +16,7 @@ class _PasswordInput extends StatelessWidget {
             style: TextStyle(decoration: TextDecoration.none),
             decoration: InputDecoration(
               hintText: 'Password',
+              contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),
               prefixIcon: Icon(Icons.lock),
               border: InputBorder.none,
               errorText: errorText?.isEmpty == true ? null : errorText,
