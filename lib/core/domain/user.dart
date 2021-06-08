@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
-//part 'user.g.dart';
+part 'user.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class User {
@@ -13,6 +12,9 @@ class User {
     required this.token,
     required this.id,
   });
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   @JsonKey(name: 'id')
   final String id;
