@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TextFieldSkin extends StatelessWidget {
-  const TextFieldSkin({@required this.child, this.margin});
+  const TextFieldSkin({required this.child, this.margin});
 
   final Widget child;
-  final EdgeInsets margin;
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {

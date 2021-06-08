@@ -6,12 +6,12 @@ import 'package:meta/meta.dart';
 @JsonSerializable(explicitToJson: true)
 class User {
   const User({
-    @required this.name,
-    @required this.email,
-    @required this.password,
-    @required this.confirmedPassword,
-    @required this.token,
-    @required this.id,
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.confirmedPassword,
+    required this.token,
+    required this.id,
   });
 
   @JsonKey(name: 'id')

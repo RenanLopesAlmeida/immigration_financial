@@ -5,12 +5,10 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _presenter = Provider.of<LoginPresenter>(context);
 
-    return StreamBuilder<bool>(
+    return StreamBuilder<bool?>(
       stream: _presenter.isFormValidStream,
       builder: (_, snapshot) {
-        return AnimatedContainer(
-          duration: Duration(milliseconds: 500),
-          curve: Curves.linear,
+        return Container(
           height: 50,
           child: ElevatedButton(
             onPressed: snapshot.data == true ? _presenter.authenticate : null,

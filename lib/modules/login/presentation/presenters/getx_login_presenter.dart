@@ -1,12 +1,10 @@
-import '../../../../core/infra/infra.dart';
-import 'package:meta/meta.dart';
 import 'package:get/state_manager.dart';
 
 import '../../login.dart';
 
 class GetxLoginPresenter implements LoginPresenter {
   GetxLoginPresenter({
-    @required this.validation,
+    required this.validation,
     //@required this.saveCurrentAccount,
   });
 
@@ -14,28 +12,31 @@ class GetxLoginPresenter implements LoginPresenter {
   //final SaveCurrentAccount saveCurrentAccount;
   //final Authentication authentication;
 
-  String _email;
-  String _password;
-  var _emailError = RxString(null);
-  var _passwordError = RxString(null);
-  var _mainError = RxString(null);
-  var _navigateTo = RxString(null);
+  String? _email;
+  String? _password;
+  final _emailError = RxnString();
+  final _passwordError = RxnString();
+  final _mainError = RxnString();
+  final _navigateTo = RxnString();
   var _isFormValid = RxBool(false);
-  var _isLoading = RxBool(false);
+  final _isLoading = RxBool(false);
 
-  Stream<String> get emailErrorStream => _emailError.stream;
+  Stream<String?> get emailErrorStream => _emailError.stream;
 
-  Stream<bool> get isFormValidStream => _isFormValid.stream;
+  Stream<bool?> get isFormValidStream => _isFormValid.stream;
 
-  Stream<bool> get isLoadingStream => _isLoading.stream;
+  Stream<bool?> get isLoadingStream => _isLoading.stream;
 
-  Stream<String> get mainErrorStream => _mainError.stream;
+  Stream<String?> get mainErrorStream => _mainError.stream;
 
-  Stream<String> get navigateToStream => _navigateTo.stream;
+  Stream<String?> get navigateToStream => _navigateTo.stream;
 
-  Stream<String> get passwordErrorStream => _passwordError.stream;
+  Stream<String?> get passwordErrorStream => _passwordError.stream;
 
   Future<void> authenticate() async {
+    _isLoading.value = true;
+    await Future.delayed(Duration(seconds: 1));
+    _isLoading.value = false;
     // final accountEntity = await authentication
     //     .auth(AuthenticationParams(email: _email, password: _password));
 

@@ -11,16 +11,16 @@ class _SignUpButton extends StatelessWidget {
         bottom: Spacing.normal,
       ),
       height: 40,
-      child: StreamBuilder<bool>(
+      child: StreamBuilder<bool?>(
         stream: presenter.isFormValidStream,
         builder: (_, snapshot) {
-          bool isFormValid = snapshot.data;
+          bool? isFormValid = snapshot.data;
 
           return TextButton(
             onPressed: isFormValid == false ? null : presenter.authenticate,
             child: Text(
               'Sign Up',
-              style: Theme.of(context).textTheme.button.copyWith(
+              style: Theme.of(context).textTheme.button!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),

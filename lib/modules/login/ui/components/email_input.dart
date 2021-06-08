@@ -6,10 +6,10 @@ class _EmailInput extends StatelessWidget {
     final presenter = Provider.of<LoginPresenter>(context, listen: false);
 
     return TextFieldSkin(
-      child: StreamBuilder<String>(
+      child: StreamBuilder<String?>(
         stream: presenter.emailErrorStream,
-        builder: (context, snapshot) {
-          String errorText = snapshot.data;
+        builder: (_, snapshot) {
+          final errorText = snapshot.data;
 
           return TextField(
             onChanged: presenter.validateEmail,

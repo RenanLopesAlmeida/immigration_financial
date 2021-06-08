@@ -3,13 +3,13 @@ import 'package:immigration_financial/core/validation/validators/validators.dart
 
 class ValidationBuilder {
   ValidationBuilder._();
-  static ValidationBuilder _instance;
-  String fieldName;
+  static ValidationBuilder? _instance;
+  String? fieldName;
   List<FieldValidation> validations = [];
 
-  static ValidationBuilder field(String fieldName) {
+  static ValidationBuilder? field(String fieldName) {
     _instance = ValidationBuilder._();
-    _instance.fieldName = fieldName;
+    _instance!.fieldName = fieldName;
     return _instance;
   }
 
