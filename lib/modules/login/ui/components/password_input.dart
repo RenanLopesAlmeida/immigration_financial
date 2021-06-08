@@ -14,7 +14,10 @@ class _PasswordInput extends StatelessWidget {
 
           return TextField(
             onChanged: presenter.validatePassword,
-            style: TextStyle(decoration: TextDecoration.none),
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              color: Colors.white,
+            ),
             decoration: InputDecoration(
               hintText: 'Password',
               contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),

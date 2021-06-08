@@ -13,6 +13,10 @@ class _EmailInput extends StatelessWidget {
 
           return TextField(
             onChanged: presenter.validateEmail,
+            style: TextStyle(
+              color: Colors.white,
+              decoration: TextDecoration.none,
+            ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),
               hintText: 'E-mail',
