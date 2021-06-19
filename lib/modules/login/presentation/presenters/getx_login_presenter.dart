@@ -1,14 +1,17 @@
 import 'package:get/state_manager.dart';
 
+import '../../../../core/core.dart';
 import '../../login.dart';
 
 class GetxLoginPresenter implements LoginPresenter {
   GetxLoginPresenter({
     required this.validation,
+    required this.remoteAuthenticateInputPort,
     //@required this.saveCurrentAccount,
   });
 
   final Validation validation;
+  final RemoteAuthenticateInputPort remoteAuthenticateInputPort;
   //final SaveCurrentAccount saveCurrentAccount;
   //final Authentication authentication;
 
@@ -35,7 +38,8 @@ class GetxLoginPresenter implements LoginPresenter {
 
   Future<void> authenticate() async {
     _isLoading.value = true;
-    await Future.delayed(Duration(seconds: 1));
+    await remoteAuthenticateInputPort.authenticate(
+        AuthenticationParams(email: _email!, password: _password!));
     _isLoading.value = false;
     // final accountEntity = await authentication
     //     .auth(AuthenticationParams(email: _email, password: _password));

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import '../core/initializer/initializer.dart';
 import './modules/ui/ui.dart';
 import './modules/login/login.dart';
 
-void main() {
-  Provider.debugCheckInvalidValueType = null;
+void main() async {
+  await AppInitializer.init();
 
   runApp(MyApp());
 }
