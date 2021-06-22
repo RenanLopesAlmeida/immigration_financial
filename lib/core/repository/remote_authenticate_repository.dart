@@ -16,6 +16,27 @@ class RemoteAuthenticateRepository implements RemoteAuthenticateOutputPort {
       if (response.error != null) {
         throw DomainError.invalidCredentials;
       }
+
+      final session = response.data;
+      final userID = session?.user?.id;
+      final token = response.data?.accessToken;
+
+      if (session == null ||
+          session.user == null ||
+          userID == null ||
+          token == null) {
+        return null;
+      }
+
+      final user = User(
+          email: params.email,
+          id: userID,
+          token: token,
+          password: params.password,
+          name: null,
+          confirmedPassword: null);
+
+      return user;
     } on DomainError catch (exception) {
       throw exception;
     }

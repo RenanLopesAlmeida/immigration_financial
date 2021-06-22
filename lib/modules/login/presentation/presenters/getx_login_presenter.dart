@@ -1,5 +1,4 @@
 import 'package:get/state_manager.dart';
-import 'package:immigration_financial/core/error/error.dart';
 
 import '../../../../core/core.dart';
 import '../../login.dart';
@@ -8,13 +7,12 @@ class GetxLoginPresenter implements LoginPresenter {
   GetxLoginPresenter({
     required this.validation,
     required this.remoteAuthenticateInputPort,
-    //@required this.saveCurrentAccount,
+    required this.localSaveCurrentAccount,
   });
 
   final Validation validation;
   final RemoteAuthenticateInputPort remoteAuthenticateInputPort;
-  //final SaveCurrentAccount saveCurrentAccount;
-  //final Authentication authentication;
+  final LocalSaveCurrentAccountInputPort localSaveCurrentAccount;
 
   String? _email;
   String? _password;
@@ -49,18 +47,19 @@ class GetxLoginPresenter implements LoginPresenter {
     _mainError.value = null;
 
     try {
-      await remoteAuthenticateInputPort
+      final user = await remoteAuthenticateInputPort
           .authenticate(AuthenticationParams(email: email, password: password));
+
+      if (user == null) {
+        return;
+      }
+
+      await localSaveCurrentAccount.saveAccount(AccountEntity(user.token));
       _isLoading.value = false;
     } on DomainError catch (error) {
       _isLoading.value = false;
       _mainError.value = error.description;
     }
-
-    // final accountEntity = await authentication
-    //     .auth(AuthenticationParams(email: _email, password: _password));
-
-    //await saveCurrentAccount.save(accountEntity);
   }
 
   void dispose() {}

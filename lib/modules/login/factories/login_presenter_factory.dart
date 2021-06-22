@@ -7,5 +7,6 @@ GetxLoginPresenter makeGetxLoginPresenter() {
   return GetxLoginPresenter(
     validation: makeLoginValidation(),
     remoteAuthenticateInputPort: ServiceLocatorConfig.provide(),
+    localSaveCurrentAccount: ServiceLocatorConfig.provide(),
   );
 }
