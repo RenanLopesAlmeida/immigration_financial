@@ -1,4 +1,5 @@
 import 'package:get/state_manager.dart';
+import 'package:immigration_financial/core/error/error.dart';
 
 import '../../../../core/core.dart';
 import '../../login.dart';
@@ -37,10 +38,25 @@ class GetxLoginPresenter implements LoginPresenter {
   Stream<String?> get passwordErrorStream => _passwordError.stream;
 
   Future<void> authenticate() async {
+    final email = _email;
+    final password = _password;
+
+    if (email == null || password == null) {
+      return;
+    }
+
     _isLoading.value = true;
-    await remoteAuthenticateInputPort.authenticate(
-        AuthenticationParams(email: _email!, password: _password!));
-    _isLoading.value = false;
+    _mainError.value = null;
+
+    try {
+      await remoteAuthenticateInputPort
+          .authenticate(AuthenticationParams(email: email, password: password));
+      _isLoading.value = false;
+    } on DomainError catch (error) {
+      _isLoading.value = false;
+      _mainError.value = error.description;
+    }
+
     // final accountEntity = await authentication
     //     .auth(AuthenticationParams(email: _email, password: _password));
 
