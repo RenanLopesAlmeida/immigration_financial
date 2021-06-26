@@ -4,7 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../domain/account_entity.dart';
 import '../ports/ports.dart';
 
-@injectable
+@singleton
 class LocalSaveCurrentAccountUseCase
     implements LocalSaveCurrentAccountInputPort {
   final FlutterSecureStorage secureStorage = FlutterSecureStorage();
