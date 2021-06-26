@@ -1,7 +1,7 @@
 class AssetPath {
-  static final _baseUrl = './assets/';
+  static final _baseUrl = 'assets/';
 
   // ::LOTTIE
-  static final String AIRPLANE_LOADING =
+  static final String airplaneLoading =
       _baseUrl + 'lotties/airplane_loading.json';
 }
