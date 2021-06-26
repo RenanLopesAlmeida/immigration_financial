@@ -1,4 +1,8 @@
-enum DomainError { unexpected, invalidCredentials }
+enum DomainError {
+  unexpected,
+  invalidCredentials,
+  notFound,
+}
 
 extension DomainErrorExtension on DomainError {
   String get description {
