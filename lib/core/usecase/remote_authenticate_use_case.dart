@@ -1,6 +1,9 @@
 import 'package:injectable/injectable.dart';
 
-import '../../core/core.dart';
+import '../domain/domain.dart';
+import '../infra/protocols/protocols.dart';
+import '../ports/input/remote_authenticate_input_port.dart';
+import '../ports/output/remote_authenticate_output_port.dart';
 
 @singleton
 class RemoteAuthenticateUseCase implements RemoteAuthenticateInputPort {
