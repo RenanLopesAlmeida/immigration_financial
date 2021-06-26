@@ -30,6 +30,16 @@ class LoginPage extends StatelessWidget {
                 hideLoading(context);
               }
             });
+
+            _presenter.mainErrorStream.listen((error) {
+              print('error: $error');
+              if (error != null && error != '') {
+                showErrorMessage(context, error);
+              }
+            }, onDone: () {
+              print('ERROOOOO');
+            });
+
             return CustomScrollView(slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,

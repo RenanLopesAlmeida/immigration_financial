@@ -1,5 +1,5 @@
 import '../../core.dart';
 
 abstract class RemoteAuthenticateOutputPort {
-  Future<User> authenticate(AuthenticationParams params);
+  Future<User?> authenticate(AuthenticationParams params);
 }

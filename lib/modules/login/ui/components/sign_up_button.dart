@@ -17,7 +17,8 @@ class _SignUpButton extends StatelessWidget {
           bool? isFormValid = snapshot.data;
 
           return TextButton(
-            onPressed: isFormValid == false ? null : presenter.authenticate,
+            onPressed:
+                null, //isFormValid == false ? null : presenter.authenticate,
             child: Text(
               'Sign Up',
               style: Theme.of(context).textTheme.button!.copyWith(

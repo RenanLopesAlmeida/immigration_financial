@@ -1,16 +1,18 @@
 import 'package:get/state_manager.dart';
 
+import '../../../../core/core.dart';
 import '../../login.dart';
 
 class GetxLoginPresenter implements LoginPresenter {
   GetxLoginPresenter({
     required this.validation,
-    //@required this.saveCurrentAccount,
+    required this.remoteAuthenticateInputPort,
+    required this.localSaveCurrentAccount,
   });
 
   final Validation validation;
-  //final SaveCurrentAccount saveCurrentAccount;
-  //final Authentication authentication;
+  final RemoteAuthenticateInputPort remoteAuthenticateInputPort;
+  final LocalSaveCurrentAccountInputPort localSaveCurrentAccount;
 
   String? _email;
   String? _password;
@@ -34,13 +36,30 @@ class GetxLoginPresenter implements LoginPresenter {
   Stream<String?> get passwordErrorStream => _passwordError.stream;
 
   Future<void> authenticate() async {
-    _isLoading.value = true;
-    await Future.delayed(Duration(seconds: 1));
-    _isLoading.value = false;
-    // final accountEntity = await authentication
-    //     .auth(AuthenticationParams(email: _email, password: _password));
+    final email = _email;
+    final password = _password;
 
-    //await saveCurrentAccount.save(accountEntity);
+    if (email == null || password == null) {
+      return;
+    }
+
+    _isLoading.value = true;
+    _mainError.value = null;
+
+    try {
+      final user = await remoteAuthenticateInputPort
+          .authenticate(AuthenticationParams(email: email, password: password));
+
+      if (user == null) {
+        return;
+      }
+
+      await localSaveCurrentAccount.saveAccount(AccountEntity(user.token));
+      _isLoading.value = false;
+    } on DomainError catch (error) {
+      _isLoading.value = false;
+      _mainError.value = error.description;
+    }
   }
 
   void dispose() {}

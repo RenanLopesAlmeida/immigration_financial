@@ -19,13 +19,13 @@ class User {
   @JsonKey(name: 'id')
   final String id;
   @JsonKey(name: 'name')
-  final String name;
+  final String? name;
   @JsonKey(name: 'email')
   final String email;
   @JsonKey(name: 'password')
   final String password;
   @JsonKey(name: 'confirmedPassword')
-  final String confirmedPassword;
+  final String? confirmedPassword;
   @JsonKey(name: 'token')
   final String token;
 }
