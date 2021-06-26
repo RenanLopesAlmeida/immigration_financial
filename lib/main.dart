@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:immigration_financial/modules/splash/ui/splash_page.dart';
 
 import '../core/initializer/initializer.dart';
 import './modules/ui/ui.dart';
 import './modules/login/login.dart';
+import './modules/splash/factories/factory.dart';
 
 void main() async {
   await AppInitializer.init();
@@ -21,8 +21,18 @@ class MyApp extends StatelessWidget {
       theme: makeAppTheme(),
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => SplashPage()),
-        GetPage(name: '/login', page: () => makeLoginPage()),
+        GetPage(
+          name: '/',
+          page: () => makeSplashPage(),
+          transition: Transition.fadeIn,
+          transitionDuration: Duration(seconds: 3),
+        ),
+        GetPage(
+          name: '/login',
+          page: () => makeLoginPage(),
+          transition: Transition.rightToLeft,
+          transitionDuration: Duration(seconds: 1),
+        ),
       ],
     );
   }
