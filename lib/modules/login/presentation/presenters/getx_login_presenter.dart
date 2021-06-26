@@ -1,45 +1,65 @@
-import '../../../../core/infra/infra.dart';
-import 'package:meta/meta.dart';
 import 'package:get/state_manager.dart';
 
+import '../../../../core/core.dart';
 import '../../login.dart';
 
 class GetxLoginPresenter implements LoginPresenter {
   GetxLoginPresenter({
-    @required this.validation,
-    //@required this.saveCurrentAccount,
+    required this.validation,
+    required this.remoteAuthenticateInputPort,
+    required this.localSaveCurrentAccount,
   });
 
   final Validation validation;
-  //final SaveCurrentAccount saveCurrentAccount;
-  //final Authentication authentication;
+  final RemoteAuthenticateInputPort remoteAuthenticateInputPort;
+  final LocalSaveCurrentAccountInputPort localSaveCurrentAccount;
 
-  String _email;
-  String _password;
-  var _emailError = RxString(null);
-  var _passwordError = RxString(null);
-  var _mainError = RxString(null);
-  var _navigateTo = RxString(null);
+  String? _email;
+  String? _password;
+  final _emailError = RxnString();
+  final _passwordError = RxnString();
+  final _mainError = RxnString();
+  final _navigateTo = RxnString();
   var _isFormValid = RxBool(false);
-  var _isLoading = RxBool(false);
+  final _isLoading = RxBool(false);
 
-  Stream<String> get emailErrorStream => _emailError.stream;
+  Stream<String?> get emailErrorStream => _emailError.stream;
 
-  Stream<bool> get isFormValidStream => _isFormValid.stream;
+  Stream<bool?> get isFormValidStream => _isFormValid.stream;
 
-  Stream<bool> get isLoadingStream => _isLoading.stream;
+  Stream<bool?> get isLoadingStream => _isLoading.stream;
 
-  Stream<String> get mainErrorStream => _mainError.stream;
+  Stream<String?> get mainErrorStream => _mainError.stream;
 
-  Stream<String> get navigateToStream => _navigateTo.stream;
+  Stream<String?> get navigateToStream => _navigateTo.stream;
 
-  Stream<String> get passwordErrorStream => _passwordError.stream;
+  Stream<String?> get passwordErrorStream => _passwordError.stream;
 
   Future<void> authenticate() async {
-    // final accountEntity = await authentication
-    //     .auth(AuthenticationParams(email: _email, password: _password));
+    final email = _email;
+    final password = _password;
 
-    //await saveCurrentAccount.save(accountEntity);
+    if (email == null || password == null) {
+      return;
+    }
+
+    _isLoading.value = true;
+    _mainError.value = null;
+
+    try {
+      final user = await remoteAuthenticateInputPort
+          .authenticate(AuthenticationParams(email: email, password: password));
+
+      if (user == null) {
+        return;
+      }
+
+      await localSaveCurrentAccount.saveAccount(AccountEntity(user.token));
+      _isLoading.value = false;
+    } on DomainError catch (error) {
+      _isLoading.value = false;
+      _mainError.value = error.description;
+    }
   }
 
   void dispose() {}

@@ -21,43 +21,64 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: _colorScheme.primaryVariant,
       body: SafeArea(
-        child: CustomScrollView(slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Spacing.normal, vertical: Spacing.large),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _LoginHeader(),
-                  Expanded(
-                    child: Container(
-                      child: Provider<LoginPresenter>(
-                        create: (_) => _presenter,
-                        child: Form(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Spacer(),
-                              _EmailInput(),
-                              _PasswordInput(),
-                              Spacer(),
-                              _LoginButton(),
-                              _SignUpButton(),
-                            ],
+        child: Builder(
+          builder: (_) {
+            _presenter.isLoadingStream.listen((isLoading) {
+              if (isLoading == true) {
+                showLoading(context);
+              } else {
+                hideLoading(context);
+              }
+            });
+
+            _presenter.mainErrorStream.listen((error) {
+              print('error: $error');
+              if (error != null && error != '') {
+                showErrorMessage(context, error);
+              }
+            }, onDone: () {
+              print('ERROOOOO');
+            });
+
+            return CustomScrollView(slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Spacing.normal, vertical: Spacing.large),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _LoginHeader(),
+                      Expanded(
+                        child: Container(
+                          child: Provider<LoginPresenter>(
+                            create: (_) => _presenter,
+                            child: Form(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Spacer(),
+                                  _EmailInput(),
+                                  _PasswordInput(),
+                                  Spacer(),
+                                  _LoginButton(),
+                                  _SignUpButton(),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ]),
+            ]);
+          },
+        ),
       ),
     );
   }

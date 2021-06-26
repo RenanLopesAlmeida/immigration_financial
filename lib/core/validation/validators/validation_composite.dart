@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../protocols/protocols.dart';
 
 class ValidationComposite implements Validation {
@@ -7,8 +5,8 @@ class ValidationComposite implements Validation {
 
   List<FieldValidation> validations;
   @override
-  String validate({@required String field, @required String value}) {
-    String error;
+  String? validate({required String field, required String value}) {
+    String? error;
     final sameFieldValidation =
         validations.where((v) => v.field == field).toList();
 

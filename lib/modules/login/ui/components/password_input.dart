@@ -7,15 +7,20 @@ class _PasswordInput extends StatelessWidget {
 
     return TextFieldSkin(
       margin: EdgeInsets.symmetric(vertical: Spacing.normal),
-      child: StreamBuilder<String>(
+      child: StreamBuilder<String?>(
         stream: presenter.passwordErrorStream,
         builder: (_, snapshot) {
-          String errorText = snapshot.data;
+          final errorText = snapshot.data;
+
           return TextField(
             onChanged: presenter.validatePassword,
-            style: TextStyle(decoration: TextDecoration.none),
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              color: Colors.white,
+            ),
             decoration: InputDecoration(
               hintText: 'Password',
+              contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),
               prefixIcon: Icon(Icons.lock),
               border: InputBorder.none,
               errorText: errorText?.isEmpty == true ? null : errorText,
@@ -23,6 +28,23 @@ class _PasswordInput extends StatelessWidget {
           );
         },
       ),
+      // child: StreamBuilder<String?>(
+      //   stream: presenter.passwordErrorStream,
+      //   builder: (_, snapshot) {
+      //     String? errorText = snapshot.data;
+      //     return TextField(
+      //       onChanged: presenter.validatePassword,
+      //       style: TextStyle(decoration: TextDecoration.none),
+      //       decoration: InputDecoration(
+      //         hintText: 'Password',
+      //         contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),
+      //         prefixIcon: Icon(Icons.lock),
+      //         border: InputBorder.none,
+      //         errorText: errorText?.isEmpty == true ? null : errorText,
+      //       ),
+      //     );
+      //   },
+      // ),
     );
   }
 }
