@@ -1,9 +1,9 @@
-part of '../login_page.dart';
+part of '../sign_up_page.dart';
 
-class _PasswordInput extends StatelessWidget {
+class _ConfirmedPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final presenter = Provider.of<LoginPresenter>(context, listen: false);
+    final presenter = Provider.of<SignUpPresenter>(context, listen: false);
 
     return TextFieldSkin(
       margin: EdgeInsets.symmetric(vertical: Spacing.normal),
@@ -29,23 +29,6 @@ class _PasswordInput extends StatelessWidget {
           );
         },
       ),
-      // child: StreamBuilder<String?>(
-      //   stream: presenter.passwordErrorStream,
-      //   builder: (_, snapshot) {
-      //     String? errorText = snapshot.data;
-      //     return TextField(
-      //       onChanged: presenter.validatePassword,
-      //       style: TextStyle(decoration: TextDecoration.none),
-      //       decoration: InputDecoration(
-      //         hintText: 'Password',
-      //         contentPadding: EdgeInsets.only(left: 11, top: 10, bottom: 14),
-      //         prefixIcon: Icon(Icons.lock),
-      //         border: InputBorder.none,
-      //         errorText: errorText?.isEmpty == true ? null : errorText,
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 }

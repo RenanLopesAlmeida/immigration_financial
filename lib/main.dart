@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../core/initializer/initializer.dart';
 import './modules/ui/ui.dart';
 import './modules/login/login.dart';
+import './modules/sign_up/sign_up.dart';
 import './modules/splash/factories/factory.dart';
 
 void main() async {
@@ -24,14 +25,17 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => makeSplashPage(),
-          transition: Transition.fadeIn,
-          transitionDuration: Duration(seconds: 3),
         ),
         GetPage(
           name: '/login',
           page: () => makeLoginPage(),
+          transition: Transition.leftToRight,
+        ),
+        GetPage(
+          name: '/signUp',
+          page: () => makeSignUpPage(),
           transition: Transition.rightToLeft,
-          transitionDuration: Duration(seconds: 1),
+          //transitionDuration: Duration(seconds: 1),
         ),
       ],
     );

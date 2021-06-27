@@ -1,6 +1,6 @@
-part of '../login_page.dart';
+part of '../sign_up_page.dart';
 
-class _LoginHeader extends StatelessWidget {
+class _SignUpHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
@@ -20,7 +20,7 @@ class _LoginHeader extends StatelessWidget {
         Container(
           height: 32,
           child: Text(
-            'Access your Account',
+            'Create your Account',
             style: _textTheme.headline1,
             textAlign: TextAlign.start,
           ),
@@ -31,14 +31,14 @@ class _LoginHeader extends StatelessWidget {
           child: Wrap(
             children: [
               Text(
-                'New here?',
+                'Already have an account?',
                 style: _textTheme.subtitle2,
                 textAlign: TextAlign.start,
               ),
               Container(
                 margin: EdgeInsets.only(left: Spacing.small),
                 child: Text(
-                  'Create your Account',
+                  'Log in into your account',
                   style: _textTheme.subtitle1,
                   textAlign: TextAlign.start,
                 ),

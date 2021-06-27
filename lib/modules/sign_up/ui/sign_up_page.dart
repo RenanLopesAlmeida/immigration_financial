@@ -5,15 +5,17 @@ import 'package:provider/provider.dart';
 import '../protocols/protocols.dart';
 import '../../ui/ui.dart';
 
-part './components/login_header.dart';
+part './components/sign_up_header.dart';
 part './components/email_input.dart';
 part './components/password_input.dart';
 part './components/login_button.dart';
 part './components/sign_up_button.dart';
+part './components/name_input.dart';
+part './components/confirmed_password_input.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage(this._presenter);
-  final LoginPresenter _presenter;
+class SignUpPage extends StatelessWidget {
+  const SignUpPage(this._presenter);
+  final SignUpPresenter _presenter;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +53,10 @@ class LoginPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _LoginHeader(),
+                      _SignUpHeader(),
                       Expanded(
                         child: Container(
-                          child: Provider<LoginPresenter>(
+                          child: Provider<SignUpPresenter>(
                             create: (_) => _presenter,
                             child: Form(
                               child: Column(
@@ -62,11 +64,13 @@ class LoginPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Spacer(),
+                                  _NameInput(),
                                   _EmailInput(),
                                   _PasswordInput(),
+                                  _ConfirmedPasswordInput(),
                                   Spacer(),
-                                  _LoginButton(),
                                   _SignUpButton(),
+                                  _LoginButton(),
                                 ],
                               ),
                             ),

@@ -2,7 +2,9 @@ import 'package:immigration_financial/core/domain/user.dart';
 import 'package:immigration_financial/core/error/error.dart';
 import 'package:immigration_financial/core/infra/config/config.dart';
 import 'package:immigration_financial/core/ports/output/remote_fetch_current_user_output_port.dart';
+import 'package:injectable/injectable.dart';
 
+@singleton
 class UserRepository implements RemoteFetchCurrentUserOutputPort {
   @override
   Future<User?> fetchCurrentUser({required String id}) async {
