@@ -1,12 +1,12 @@
-part of '../login_page.dart';
+part of '../sign_up_page.dart';
 
 class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final presenter = Provider.of<LoginPresenter>(context, listen: false);
+    final presenter = Provider.of<SignUpPresenter>(context, listen: false);
 
     return TextFieldSkin(
-      margin: EdgeInsets.symmetric(vertical: Spacing.normal),
+      margin: EdgeInsets.only(top: Spacing.normal),
       child: StreamBuilder<String?>(
         stream: presenter.passwordErrorStream,
         builder: (_, snapshot) {

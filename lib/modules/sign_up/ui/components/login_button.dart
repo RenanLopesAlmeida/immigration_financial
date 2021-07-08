@@ -1,6 +1,6 @@
-part of '../login_page.dart';
+part of '../sign_up_page.dart';
 
-class _SignUpButton extends StatelessWidget {
+class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,9 +10,9 @@ class _SignUpButton extends StatelessWidget {
       ),
       height: 40,
       child: TextButton(
-        onPressed: () => Get.offAllNamed('/signUp'),
+        onPressed: () => Get.offAllNamed('/login'),
         child: Text(
-          'Sign Up',
+          'Already have an account',
           style: Theme.of(context).textTheme.button!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
