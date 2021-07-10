@@ -50,11 +50,11 @@ class GetxLoginPresenter implements LoginPresenter {
       final user = await remoteAuthenticateInputPort
           .authenticate(AuthenticationParams(email: email, password: password));
 
-      if (user == null) {
+      if (user == null && user?.token == null) {
         return;
       }
 
-      await localSaveCurrentAccount.saveAccount(AccountEntity(user.token));
+      await localSaveCurrentAccount.saveAccount(AccountEntity(user!.token!));
       _isLoading.value = false;
     } on DomainError catch (error) {
       _isLoading.value = false;
