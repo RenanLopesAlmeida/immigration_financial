@@ -5,12 +5,10 @@ part 'user.g.dart';
 @JsonSerializable(explicitToJson: true)
 class User {
   const User({
+    required this.id,
     required this.name,
     required this.email,
-    required this.password,
-    required this.confirmedPassword,
-    required this.token,
-    required this.id,
+    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -22,10 +20,6 @@ class User {
   final String? name;
   @JsonKey(name: 'email')
   final String email;
-  @JsonKey(name: 'password')
-  final String password;
-  @JsonKey(name: 'confirmedPassword')
-  final String? confirmedPassword;
-  @JsonKey(name: 'token')
-  final String token;
+  @JsonKey(name: 'token', ignore: true)
+  final String? token;
 }

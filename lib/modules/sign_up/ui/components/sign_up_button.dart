@@ -11,7 +11,7 @@ class _SignUpButton extends StatelessWidget {
         return Container(
           height: 50,
           child: ElevatedButton(
-            onPressed: snapshot.data == true ? _presenter.authenticate : null,
+            onPressed: snapshot.data == true ? _presenter.signUp : null,
             child: Text('Sign Up', style: Theme.of(context).textTheme.button),
             style: ElevatedButton.styleFrom(
               primary: Theme.of(context).colorScheme.secondary,

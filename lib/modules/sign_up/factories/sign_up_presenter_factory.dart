@@ -6,7 +6,7 @@ import 'factories.dart';
 GetxSignUpPresenter makeGetxSignUpPresenter() {
   return GetxSignUpPresenter(
     validation: makeSignUpValidation(),
-    remoteAuthenticateInputPort: ServiceLocatorConfig.provide(),
+    signUpInputPort: ServiceLocatorConfig.provide(),
     localSaveCurrentAccount: ServiceLocatorConfig.provide(),
   );
 }

@@ -8,13 +8,13 @@ class _ConfirmedPasswordInput extends StatelessWidget {
     return TextFieldSkin(
       margin: EdgeInsets.symmetric(vertical: Spacing.normal),
       child: StreamBuilder<String?>(
-        stream: presenter.passwordErrorStream,
+        stream: presenter.confirmPasswordErrorStream,
         builder: (_, snapshot) {
           final errorText = snapshot.data;
 
           return TextField(
             obscureText: true,
-            onChanged: presenter.validatePassword,
+            onChanged: presenter.validateConfirmPassword,
             style: TextStyle(
               decoration: TextDecoration.none,
               color: Colors.white,

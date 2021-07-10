@@ -2,6 +2,7 @@ enum DomainError {
   unexpected,
   invalidCredentials,
   notFound,
+  emailAlreadyExists
 }
 
 extension DomainErrorExtension on DomainError {
@@ -9,6 +10,9 @@ extension DomainErrorExtension on DomainError {
     switch (this) {
       case DomainError.invalidCredentials:
         return 'Credentials are invalid';
+
+      case DomainError.emailAlreadyExists:
+        return 'This account already exists, try to log in';
 
       default:
         return 'Ops! Something unexpected happend. Please try again later!';

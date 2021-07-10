@@ -21,9 +21,8 @@ class UserRepository implements RemoteFetchCurrentUserOutputPort {
       }
 
       final data = response.data;
-      final token = response.data?.accessToken;
 
-      if (data == null || token == null) {
+      if (data == null) {
         return null;
       }
 

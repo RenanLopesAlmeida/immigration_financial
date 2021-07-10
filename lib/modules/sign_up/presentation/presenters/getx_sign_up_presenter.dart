@@ -1,4 +1,5 @@
 import 'package:get/state_manager.dart';
+import 'package:immigration_financial/core/ports/input/sign_up_input_port.dart';
 
 import '../../../../core/core.dart';
 import '../../sign_up.dart';
@@ -6,12 +7,12 @@ import '../../sign_up.dart';
 class GetxSignUpPresenter implements SignUpPresenter {
   GetxSignUpPresenter({
     required this.validation,
-    required this.remoteAuthenticateInputPort,
+    required this.signUpInputPort,
     required this.localSaveCurrentAccount,
   });
 
   final Validation validation;
-  final RemoteAuthenticateInputPort remoteAuthenticateInputPort;
+  final SignUpInputPort signUpInputPort;
   final LocalSaveCurrentAccountInputPort localSaveCurrentAccount;
 
   String? _email;
@@ -44,11 +45,11 @@ class GetxSignUpPresenter implements SignUpPresenter {
   Stream<String?> get confirmPasswordErrorStream =>
       _confirmPasswordError.stream;
 
-  Future<void> authenticate() async {
+  Future<void> signUp() async {
     final email = _email;
     final password = _password;
 
-    if (email == null || password == null) {
+    if (_name == null || email == null || password == null) {
       return;
     }
 
@@ -56,14 +57,15 @@ class GetxSignUpPresenter implements SignUpPresenter {
     _mainError.value = null;
 
     try {
-      final user = await remoteAuthenticateInputPort
-          .authenticate(AuthenticationParams(email: email, password: password));
+      final user = await signUpInputPort
+          .signUp(SignUpParams(name: _name!, email: email, password: password));
+      //final token = user?.token;
 
       if (user == null) {
         return;
       }
 
-      await localSaveCurrentAccount.saveAccount(AccountEntity(user.token));
+      //await localSaveCurrentAccount.saveAccount(AccountEntity(token!));
       _isLoading.value = false;
     } on DomainError catch (error) {
       _isLoading.value = false;
