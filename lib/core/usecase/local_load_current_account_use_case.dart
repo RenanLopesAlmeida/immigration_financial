@@ -9,17 +9,19 @@ import '../error/error.dart';
 class LocalLoadCurrentAccountUseCase
     implements LocalLoadCurrentAccountInputPort {
   @override
-  Future<AccountEntity?> load({required String key}) async {
+  Future<AccountEntity?> load(
+      {required String accessTokenKey, required uidKey}) async {
     final FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
     try {
-      final token = await secureStorage.read(key: key);
+      final token = await secureStorage.read(key: accessTokenKey);
+      final userID = await secureStorage.read(key: uidKey);
 
-      if (token == null) {
+      if (token == null || userID == null) {
         return null;
       }
 
-      return AccountEntity(token);
+      return AccountEntity(token: token, uid: userID);
     } catch (error) {
       throw DomainError.unexpected;
     }

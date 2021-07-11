@@ -8,7 +8,6 @@ class User {
     required this.id,
     required this.name,
     required this.email,
-    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -20,6 +19,4 @@ class User {
   final String? name;
   @JsonKey(name: 'email')
   final String email;
-  @JsonKey(name: 'token', ignore: true)
-  final String? token;
 }
