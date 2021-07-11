@@ -11,7 +11,9 @@ class DashboardPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: Text('Dashboard', style: Theme.of(context).textTheme.caption),
+        centerTitle: true,
+        elevation: 0,
       ),
     );
   }
