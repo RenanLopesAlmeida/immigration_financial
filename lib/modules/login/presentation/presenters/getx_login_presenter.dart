@@ -1,6 +1,8 @@
 import 'package:get/state_manager.dart';
 
 import '../../../../core/core.dart';
+import '../../../../core/ports/input/local_save_current_account_input_port.dart';
+import '../../../../core/ports/input/remote_authenticate_input_port.dart';
 import '../../login.dart';
 
 class GetxLoginPresenter implements LoginPresenter {
@@ -50,12 +52,12 @@ class GetxLoginPresenter implements LoginPresenter {
       final user = await remoteAuthenticateInputPort
           .authenticate(AuthenticationParams(email: email, password: password));
 
-      if (user == null && user?.token == null) {
+      if (user == null) {
         return;
       }
 
-      await localSaveCurrentAccount.saveAccount(AccountEntity(user!.token!));
       _isLoading.value = false;
+      _navigateTo.value = '/dashboard';
     } on DomainError catch (error) {
       _isLoading.value = false;
       _mainError.value = error.description;

@@ -41,6 +41,16 @@ class LoginPage extends StatelessWidget {
               print('ERROOOOO');
             });
 
+            _presenter.navigateToStream.listen((page) {
+              if (page == null) {
+                return;
+              }
+
+              if (page.isNotEmpty) {
+                Get.offAllNamed(page);
+              }
+            });
+
             return CustomScrollView(slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,

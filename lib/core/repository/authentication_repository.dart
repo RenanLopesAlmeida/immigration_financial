@@ -3,17 +3,24 @@ import 'package:postgrest/postgrest.dart';
 
 import '../infra/protocols/authentication.dart';
 import '../infra/config/config.dart';
+import '../domain/domain.dart';
 import '../domain/user.dart';
 import '../ports/output/sign_up_output_port.dart';
 import '../ports/output/remote_authenticate_output_port.dart';
 import '../ports/input/remote_fetch_current_user_input_port.dart';
+import '../ports/input/local_save_current_account_input_port.dart';
 import '../error/domain_error.dart';
 
 @singleton
 class AuthenticationRepository
     implements RemoteAuthenticateOutputPort, SignUpOutputPort {
-  const AuthenticationRepository({required this.currentUserInputPort});
+  const AuthenticationRepository({
+    required this.currentUserInputPort,
+    required this.localSaveCurrentAccountInputPort,
+  });
+
   final RemoteFetchCurrentUserInputPort currentUserInputPort;
+  final LocalSaveCurrentAccountInputPort localSaveCurrentAccountInputPort;
 
   Future<User?> authenticate(AuthenticationParams params) async {
     try {
@@ -32,7 +39,11 @@ class AuthenticationRepository
         return null;
       }
 
-      return await this.currentUserInputPort.fetchCurrentUser(id: userID);
+      await localSaveCurrentAccountInputPort.saveAccount(
+        AccountEntity(token: token, uid: userID),
+      );
+
+      return await this.currentUserInputPort.fetchCurrentUser();
     } on DomainError catch (exception) {
       throw exception;
     }
@@ -60,15 +71,17 @@ class AuthenticationRepository
         id: supabaseUser.id,
         name: params.name,
         email: supabaseUser.email,
-        token: session.accessToken,
       );
 
       final userCreationResponse = await _createUser(user);
+      await localSaveCurrentAccountInputPort.saveAccount(
+        AccountEntity(token: session.accessToken, uid: user.id),
+      );
 
       if (userCreationResponse.error != null) {
         print(userCreationResponse.error?.message);
       }
-      return this.currentUserInputPort.fetchCurrentUser(id: supabaseUser.id);
+      return this.currentUserInputPort.fetchCurrentUser();
     } on DomainError catch (exception) {
       throw exception;
     }

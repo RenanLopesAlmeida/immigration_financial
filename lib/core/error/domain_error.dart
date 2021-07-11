@@ -2,7 +2,8 @@ enum DomainError {
   unexpected,
   invalidCredentials,
   notFound,
-  emailAlreadyExists
+  emailAlreadyExists,
+  unauthorized
 }
 
 extension DomainErrorExtension on DomainError {

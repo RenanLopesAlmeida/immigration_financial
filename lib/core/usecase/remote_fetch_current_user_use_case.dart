@@ -10,6 +10,5 @@ class RemoteFetchCurrentUserUseCase implements RemoteFetchCurrentUserInputPort {
   final RemoteFetchCurrentUserOutputPort _outputPort;
 
   @override
-  Future<User?> fetchCurrentUser({required String id}) async =>
-      _outputPort.fetchCurrentUser(id: id);
+  Future<User?> fetchCurrentUser() async => _outputPort.fetchCurrentUser();
 }

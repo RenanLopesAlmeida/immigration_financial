@@ -12,13 +12,19 @@ class GetxSplashPresenter implements SplashPresenter {
   final _navigateTo = RxnString();
 
   Future<void> checkAccount({int durationInMilliseconds = 1500}) async {
-    await Future.delayed(Duration(milliseconds: durationInMilliseconds));
-    try {
-      final account = await localLoadCurrentAccountInputPort.load(key: 'token');
-      _navigateTo.value = account == null ? '/login' : '/home';
-    } catch (error) {
-      _navigateTo.value = '/login';
-    }
+    await Future.delayed(Duration(milliseconds: durationInMilliseconds))
+        .then((value) async {
+      try {
+        final user = await localLoadCurrentAccountInputPort.load(
+          accessTokenKey: 'token',
+          uidKey: 'uid',
+        );
+
+        _navigateTo.value = user == null ? '/login' : '/dashboard';
+      } catch (error) {
+        _navigateTo.value = '/login';
+      }
+    });
   }
 
   Stream<String?> get navigateToStream => _navigateTo.stream;
