@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:immigration_financial/core/ports/input/remote_fetch_current_user_input_port.dart';
-import 'package:immigration_financial/core/service_locator/service_locator_config.dart';
-import 'package:immigration_financial/modules/dashboard/ui/dashboard_page.dart';
 import 'package:provider/provider.dart';
 
 import '../core/core.dart';
-import './modules/ui/ui.dart';
+import '../core/ports/input/remote_fetch_current_user_input_port.dart';
+import '../core/service_locator/service_locator_config.dart';
+import '../modules/dashboard/ui/dashboard_page.dart';
 import './modules/login/login.dart';
 import './modules/sign_up/sign_up.dart';
 import './modules/splash/factories/factory.dart';
+import './modules/ui/factories/factories.dart';
 
 void main() async {
   await AppInitializer.init();
@@ -53,12 +53,11 @@ class MyApp extends StatelessWidget {
               name: '/signUp',
               page: () => makeSignUpPage(),
               transition: Transition.rightToLeft,
-              //transitionDuration: Duration(seconds: 1),
             ),
             GetPage(
               name: '/dashboard',
               page: () => DashboardPage(),
-              transition: Transition.zoom,
+              transition: Transition.leftToRight,
             )
           ],
         ));
