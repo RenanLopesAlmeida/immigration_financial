@@ -10,15 +10,17 @@ class _NoFinancialPlan extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: Spacing.normal,
+        horizontal: Spacing.large,
       ),
       child: Column(
         children: [
           Spacer(),
           Container(
-            margin: EdgeInsets.only(bottom: Spacing.small),
+            margin: EdgeInsets.only(
+              bottom: Spacing.small,
+            ),
             child: Text(
-              'Oops! Looks like you haven\'t set up your financial planning yet!',
+              R.strings.dashboardPageEmptyFinancialDescription,
               textAlign: TextAlign.center,
               style: _textTheme.headline4?.copyWith(
                 color: _colorScheme.onSecondary.withOpacity(0.85),
@@ -37,7 +39,9 @@ class _NoFinancialPlan extends StatelessWidget {
             ),
           ),
           Spacer(),
-          PrimaryButton(text: 'Start Planning', onPressed: () {})
+          PrimaryButton(
+              text: R.strings.dashboardPageEmptyFinancialButton,
+              onPressed: () {})
         ],
       ),
     );

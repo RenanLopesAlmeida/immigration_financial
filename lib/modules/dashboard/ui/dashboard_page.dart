@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:immigration_financial/utils/i18n/resources/resources.dart';
 
 import '../../ui/asset_path.dart';
 import '../../ui/ui.dart';
@@ -14,7 +15,10 @@ class DashboardPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard', style: _textTheme.caption),
+        title: Text(
+          R.strings.dashboardPageAppBarTitle,
+          style: _textTheme.caption,
+        ),
         centerTitle: true,
         elevation: 0,
       ),

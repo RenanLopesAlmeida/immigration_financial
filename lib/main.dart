@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../core/core.dart';
-import '../core/ports/input/remote_fetch_current_user_input_port.dart';
-import '../core/service_locator/service_locator_config.dart';
-import '../modules/dashboard/ui/dashboard_page.dart';
 import './modules/login/login.dart';
 import './modules/sign_up/sign_up.dart';
 import './modules/splash/factories/factory.dart';
 import './modules/ui/factories/factories.dart';
+import '../core/core.dart';
+import '../core/ports/input/remote_fetch_current_user_input_port.dart';
+import '../core/service_locator/service_locator_config.dart';
+import '../modules/dashboard/ui/dashboard_page.dart';
 
 void main() async {
   await AppInitializer.init();
